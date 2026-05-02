@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding = 'UTF-8'?> 
+<odoo>
+<data>
+    <record id="leave_request_list" model="ir.ui.view">
+        <field name="name">leave.request.list</field>
+        <field name="model">leave.request</field>
+        <field name="arch" type="xml">
+            <list name="Leave Request List">
+                <field name="employee_id"/>
+                <field name="leave_type_id"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="duration_days"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="leave_request_form" model="ir.ui.view">
+        <field name="name">leave.request.form</field>
+        <field name="model">leave.request</field>
+        <field name="arch" type="xml">
+            <form name="Leave request Form">
+                <header>
+                    <button string="Submit" name="action_submit" type="object" invisible="state != 'draft'"/>
+                    <field name='state' widget="statusbar" statusbar_visible="draft,submitted,approved,rejected"/>
+                </header>
+                <group>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="leave_type_id"/>
+                    </group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="duration_days"/>
+                    </group>
+                    <field name="reason" placeholder="Write reason here"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_leave_request" model="ir.actions.act_window">
+        <field name="name">Leave Request</field>
+        <field name="res_model">leave.request</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_leave_request" 
+    name="Employee Leave" 
+    sequence="10"/>
+
+    <menuitem id="menu_leave_req" 
+    name="Leave" 
+    parent="menu_leave_request" 
+    action="action_leave_request" 
+    sequence="11"/>
+</data>
+</odoo>
