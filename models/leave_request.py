@@ -16,6 +16,8 @@ class LeaveRequest(models.Model):
             ('rejected','rejected')],
             default = 'draft')
     duration_days = fields.Float(compute="_compute_days")
+    rejected_reason = fields.Char(string='Rejection Reason', readonly=True)
+
 
 
     @api.constrains('date_from', 'date_to', 'leave_type_id')
@@ -39,3 +41,12 @@ class LeaveRequest(models.Model):
     def action_submit(self):
         for i in self:
             i.state = "submitted"
+
+    def action_open_wizard(self):
+        return{'type': 'ir.actions.act_window',
+            'name': 'Leave Action Wizard',
+            'res_model': 'leave.action.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_leave_id': self.id},
+        }

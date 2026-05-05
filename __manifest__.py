@@ -12,7 +12,10 @@
 
     # Views
     'data': [
+        'security/security.xml',
+        'security/record_rules.xml',
         'security/ir.model.access.csv',
+        'wizard/leave_action_wizard.xml',
         'views/leave_request.xml',
     ],
 

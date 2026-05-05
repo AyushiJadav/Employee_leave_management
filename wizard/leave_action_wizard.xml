@@ -1,0 +1,25 @@
+<!-- <? version = "1.0" encoding = "utf-8"?> -->
+<odoo>
+<data>
+    <record id="leave_action_wizard_form" model="ir.ui.view">
+        <field name="name">leave.action.wizard.form</field>
+        <field name="model">leave.action.wizard</field>
+        <field name="arch" type="xml">
+            <form name="Leave action wizard">
+                <group>
+                    <field name="action_type" widget="radio"/>
+                    <field name="note"/>
+                </group>
+                <footer>
+                    <button name="confirm"
+                    string="submit"
+                    type="object"/>
+                    <button special="cancel"
+                    string="cancel"
+                    type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</data>
+</odoo>

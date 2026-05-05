@@ -23,12 +23,14 @@
             <form name="Leave request Form">
                 <header>
                     <button string="Submit" name="action_submit" type="object" invisible="state != 'draft'"/>
+                    <button string="approve / reject" name="action_open_wizard" type="object" invisible="state != 'submitted'"/>
                     <field name='state' widget="statusbar" statusbar_visible="draft,submitted,approved,rejected"/>
                 </header>
                 <group>
                     <group>
                         <field name="employee_id"/>
                         <field name="leave_type_id"/>
+                        <field name="rejected_reason" invisible="state != 'rejected'" readonly="1"/>
                     </group>
                     <group>
                         <field name="date_from"/>

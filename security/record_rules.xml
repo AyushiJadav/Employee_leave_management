@@ -1,0 +1,23 @@
+<odoo>
+    <record id="leave_employee_rule" model="ir.rule">
+        <field name="name">Leave Employee</field>
+        <field name="model_id" ref="leave_mgmt.model_leave_request"/>
+        <field name="domain_force">[('employee_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('leave_mgmt.group_leave_employee'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="leave_manager_rule" model="ir.rule">
+        <field name="name">Leave Manager</field>
+        <field name="model_id" ref="leave_mgmt.model_leave_request"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('leave_mgmt.group_leave_manager'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+</odoo>
