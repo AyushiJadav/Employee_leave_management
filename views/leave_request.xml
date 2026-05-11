@@ -43,6 +43,21 @@
         </field>
     </record>
 
+    <record id="view_leave_request_search" model="ir.ui.view">
+    <field name="name">leave.request.search</field>
+    <field name="model">leave.request</field>
+    <field name="arch" type="xml">
+        <search string="Search Records">
+            <!-- Searchable fields -->
+            <field name="leave_type_id"/>
+            <!-- use group_by_name for applying group by in search-->
+                <filter string="Leave Type" name="group_by_leave_type" context="{'group_by': 'leave_type_id'}"/>
+            <!-- use filter_name to apply filter in search-->
+                <filter string="My leave" name="filter_my_leave" domain = "[('employee_id', '=', uid)]"/>
+        </search>
+    </field>
+</record> 
+
     <record id="action_leave_request" model="ir.actions.act_window">
         <field name="name">Leave Request</field>
         <field name="res_model">leave.request</field>

@@ -50,3 +50,25 @@ class LeaveRequest(models.Model):
             'target': 'new',
             'context': {'default_leave_id': self.id},
         }
+
+    def action_cancel_old_drafts(self):
+        records = self.search([('state','=','draft'),('date_from','<', fields.Date.today())])
+        records.write({'state':'rejected'})
+
+    def get_pending_count(self):
+        return self.search_count([('state','=','submitted')])
+    
+    def get_leaves_exceeding_max(self):
+        all_leaves = self.search([('state', '=', 'approved')])
+        return all_leaves.filtered(
+            lambda r: r.duration_days > r.leave_type_id.max_days
+        )
+
+    def get_total_days_taken(self):
+        self.ensure_one()
+        approved_leaves = self.search([
+            ('employee_id', '=', self.employee_id.id),
+            ('state', '=', 'approved')
+        ])
+        return sum(approved_leaves.mapped('duration_days'))
+        
